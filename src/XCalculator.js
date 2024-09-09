@@ -15,11 +15,21 @@ const Calculator = () => {
 
   const calculateResult = () => {
     try {
-      const calculation = eval(input); 
-      setResult(calculation);
-    } catch (error) {
-      setResult('Error');
-    }
+        if (input.includes('/0') && !input.includes('/0.')) {
+          if (input === "0/0") {
+            setResult('NaN'); 
+          } else {
+            setResult('Infinity'); 
+          }
+        } else if (/[\+\-\*\/]$/.test(input) || input === '') {
+          setResult('Error');
+        } else {
+          const calculation = eval(input);
+          setResult(calculation);
+        }
+      } catch (error) {
+        setResult('Error');
+      }
   };
 
   return (
